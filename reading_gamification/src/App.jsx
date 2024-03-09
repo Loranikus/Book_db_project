@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import SearchField from "./components/SearchField";
-import BookTable from "./components/BookTable";
+import BookList from "./components/BookList";
 
-function App() {
+const App = () => {
   return (
     <>
       <SearchField />
-      <BookTable />
+      <BookList />
     </>
   );
 }
