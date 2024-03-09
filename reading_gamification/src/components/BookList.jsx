@@ -18,7 +18,7 @@ const BookList = () => {
 
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
-      <Table className="max-w-4xl">
+      <Table aria-label="List of inserted books" className="max-w-4xl">
         <TableHeader columns={column}>
           {(column) => (
             <TableColumn key={column.key}>{column.label}</TableColumn>

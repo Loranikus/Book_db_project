@@ -22,7 +22,7 @@ const SearchField = () => {
   };
 
   const handleSearch = async (e) => {
-    e.preventDefault();
+   
     try {
       const response = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=isbn:${searchValue}&key=${API_Key}`
@@ -30,11 +30,14 @@ const SearchField = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+        
       } else {
         console.error("Failed to fetch data", response.statusText);
+        
       }
     } catch (error) {
       console.error("Error fetching data", error.message);
+      
     }
     setSearchValue("");
   };
@@ -45,11 +48,12 @@ const SearchField = () => {
         type="text"
         label="Vyplň ISBN"
         labelPlacement="inside"
-        placeholder="1234567890"
+        placeholder="Vlož číslo"
         isClearable
         color="primary"
         className="max-w-xs mb-2"
         onChange={(e) => setSearchValue(e.target.value)}
+        value={searchValue}
       />
 
       <Button onClick={handleSearch} className="max-w-xs">
