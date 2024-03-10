@@ -5,16 +5,37 @@ import {
   TableRow,
   TableCell,
   TableBody,
-  getKeyValue,
 } from "@nextui-org/react";
 import React from "react";
-import { useState, useContext } from "react";
-import { ColumnContext, RowContext } from "../Context";
+import { useState, useContext, useEffect } from "react";
+import {
+  ColumnContext,
+  RowContext,
+  SupaContext,
+  DbUpdateContext,
+} from "../Context";
 
 const BookList = () => {
-  const { row } = useContext(RowContext);
-
+  const { row, setRow } = useContext(RowContext);
+  const { supabase } = useContext(SupaContext);
+  const { updateDb } = useContext(DbUpdateContext);
   const { column } = useContext(ColumnContext);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const { data, error } = await supabase.from("bookList").select();
+        if (error) {
+          console.error("Error fetching data from Supabase:", error.message);
+        } else {
+          setRow(data);
+        }
+      } catch (error) {
+        console.error("Error fetching data from Supabase:", error.message);
+      }
+    };
+    loadData();
+  }, [supabase, updateDb]);
 
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
@@ -24,8 +45,7 @@ const BookList = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={row}
-        emptyContent="Ještě nebyly přidány žádné knihy">
+        <TableBody items={row} emptyContent="Ještě nebyly přidány žádné knihy">
           {(item) => (
             <TableRow key={item.key}>
               {(columnKey) => (

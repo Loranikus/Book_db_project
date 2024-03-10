@@ -1,25 +1,48 @@
 import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { useState, useContext } from "react";
-import { ColumnContext, RowContext } from "../Context";
+import {
+  ColumnContext,
+  RowContext,
+  SupaContext,
+  DbUpdateContext,
+} from "../Context";
 
 const API_Key = "AIzaSyBa82XsjdW95ul9KvVnf5itbSTqmc4JGCg";
 
 const SearchField = () => {
   const { row, setRow } = useContext(RowContext);
   const { column } = useContext(ColumnContext);
+  const { supabase } = useContext(SupaContext);
+  const { updateDb } = useContext(DbUpdateContext);
   const [searchValue, setSearchValue] = useState("");
 
-  const handleAddRow = (info) => {
-    const newRow = {
-      key: `${row.length} + 1`,
+  const addDbRow = async (info) => {
+    console.log();
+    const { error } = await supabase.from("bookList").insert({
+      key: `${row.length + 1}`,
       isbn: `${info.industryIdentifiers[0].identifier}`,
       author: `${info.authors}`,
       book: `${info.title}`,
-      cover: `${info.imageLinks ? info.imageLinks.thumbnail : "Obrázek není k dispozici"}`,
+      cover: `${
+        info.imageLinks ? info.imageLinks.thumbnail : "Obrázek není k dispozici"
+      }`,
+    });
+    updateDb();
+  };
+ /* const handleAddRow = (info) => {
+    const newRow = {
+      key: `${row.length + 1}`,
+      isbn: `${info.industryIdentifiers[0].identifier}`,
+      author: `${info.authors}`,
+      book: `${info.title}`,
+      cover: `${
+        info.imageLinks ? info.imageLinks.thumbnail : "Obrázek není k dispozici"
+      }`,
     };
     setRow([...row, newRow]);
-  };
+    addDbRow(newRow);
+  };*/
 
   const handleSearch = async (e) => {
     try {
@@ -29,8 +52,8 @@ const SearchField = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        const dataInfo = data.items[0].volumeInfo
-        handleAddRow(dataInfo)
+        const dataInfo = data.items[0].volumeInfo;
+        addDbRow(dataInfo);
       } else {
         console.error("Failed to fetch data", response.statusText);
       }
