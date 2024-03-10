@@ -13,18 +13,21 @@ const Navigation = () => {
   return (
     <>
       <Navbar className="flex">
-        <NavbarContent className="flex justify-end" >
+        <NavbarContent className="flex justify-end">
           <NavbarItem>
-            <Link href="/" color="foreground" isBlock>Domů</Link>
+            <Link href="/" color="foreground" isBlock>
+              Domů
+            </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/search" color="foreground" isBlock>Vyhledávač</Link>
+            <Link href="/login" color="foreground" isBlock>
+              Přihlášení
+            </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/login" color="foreground" isBlock>Přihlášení</Link>
-          </NavbarItem>
-          <NavbarItem>
-            <Link href="/registration" color="foreground" isBlock>Registrace</Link>
+            <Link href="/registration" color="foreground" isBlock>
+              Registrace
+            </Link>
           </NavbarItem>
         </NavbarContent>
       </Navbar>
