@@ -30,19 +30,6 @@ const SearchField = () => {
     });
     updateDb();
   };
- /* const handleAddRow = (info) => {
-    const newRow = {
-      key: `${row.length + 1}`,
-      isbn: `${info.industryIdentifiers[0].identifier}`,
-      author: `${info.authors}`,
-      book: `${info.title}`,
-      cover: `${
-        info.imageLinks ? info.imageLinks.thumbnail : "Obrázek není k dispozici"
-      }`,
-    };
-    setRow([...row, newRow]);
-    addDbRow(newRow);
-  };*/
 
   const handleSearch = async (e) => {
     try {
