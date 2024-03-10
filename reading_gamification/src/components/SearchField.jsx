@@ -1,9 +1,9 @@
-import { Input } from "@nextui-org/react";
-import { Button } from "@nextui-org/react";
+import { Input, Button, Tooltip } from "@nextui-org/react";
 import { useState, useContext } from "react";
 import { SupaContext } from "../Context/SupaContext";
 import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
+import { v4 as uuidv4 } from "uuid";
 import { DbUpdateContext } from "../Context/DbUpdateContext";
 
 const API_Key = "AIzaSyBa82XsjdW95ul9KvVnf5itbSTqmc4JGCg";
@@ -12,12 +12,13 @@ const SearchField = () => {
   const { row, setRow } = useContext(RowContext);
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
+  const { auth } = useContext(AuthContext);
   const [searchValue, setSearchValue] = useState("");
 
   const addDbRow = async (info) => {
-    console.log();
+    const newKey = uuidv4();
     const { error } = await supabase.from("bookList").insert({
-      key: `${row.length + 1}`,
+      key: newKey,
       isbn: `${info.industryIdentifiers[0].identifier}`,
       author: `${info.authors}`,
       book: `${info.title}`,
@@ -53,7 +54,8 @@ const SearchField = () => {
         type="text"
         label="Vyplň ISBN"
         labelPlacement="inside"
-        placeholder="Vlož číslo"
+        placeholder={auth ?  "Vyplň hledané ISBN" : "Nejsi přihlášený"}
+        isDisabled={!auth}
         isClearable
         color="primary"
         className="max-w-xs mb-2"
@@ -61,7 +63,7 @@ const SearchField = () => {
         value={searchValue}
       />
 
-      <Button onClick={handleSearch} className="max-w-xs">
+      <Button isDisabled={!auth} onClick={handleSearch} className="max-w-xs">
         Najdi knihu!
       </Button>
     </div>

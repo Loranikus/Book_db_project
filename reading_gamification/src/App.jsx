@@ -10,6 +10,7 @@ import { SupaContextProvider } from "./Context/SupaContext";
 import { DbUpdateContextProvider } from "./Context/DbUpdateContext";
 import { AuthContextProvider } from "./Context/AuthContext";
 import { Routes, Route, Link } from "react-router-dom";
+import Navigation from "./components/Navigation";
 
 const App = () => {
   return (
@@ -19,10 +20,12 @@ const App = () => {
           <DbUpdateContextProvider>
             <ColumnContextProvider>
               <RowContextProvider>
+                <Navigation />
                 <Routes>
                   <Route path="/" element={<BookList />} />
                   <Route path="/registration" element={<Registration />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/search" element={<SearchField />} />
                 </Routes>
               </RowContextProvider>
             </ColumnContextProvider>

@@ -5,6 +5,7 @@ import {
   TableRow,
   TableCell,
   TableBody,
+  Image
 } from "@nextui-org/react";
 import React from "react";
 import { useState, useContext, useEffect } from "react";
@@ -57,7 +58,7 @@ const BookList = () => {
               {(columnKey) => (
                 <TableCell key={columnKey}>
                   {columnKey === "cover" ? (
-                    <img
+                    <Image
                       src={item[columnKey]}
                       alt="Book Cover"
                       style={{ maxWidth: "100px", maxHeight: "100px" }}
