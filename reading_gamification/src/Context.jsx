@@ -5,10 +5,19 @@ export const ColumnContext = createContext(null);
 export const RowContext = createContext(null);
 export const SupaContext = createContext(null);
 export const DbUpdateContext = createContext(null);
+export const AuthContext = createContext(null);
 
 const supaURL = "https://wdhsblcbpdlovrfqloqi.supabase.co";
 const supaKey =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6IndkaHNibGNicGRsb3ZyZnFsb3FpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MTAwNjAxNzQsImV4cCI6MjAyNTYzNjE3NH0.-yYvrqwuQJmDLW6qwN0lV5LZHdvC6H-iUBMKRs3mbKI";
+
+export const AuthContextProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+
+  return (
+    <AuthContext.Provider value={{ user }}>{children}</AuthContext.Provider>
+  );
+};
 
 export const DbUpdateContextProvider = ({ children }) => {
   const [dbUpdated, setDbUpdated] = useState(false);
