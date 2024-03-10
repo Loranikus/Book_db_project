@@ -30,22 +30,7 @@ export const ColumnContextProvider = ({ children }) => {
 };
 
 export const RowContextProvider = ({ children }) => {
-  const [row, setRow] = useState([
-    {
-      key: "1",
-      isbn: "vzorová data",
-      author: "vzorová data",
-      book: "vzorová data",
-      cover: "vzorová data",
-    },
-    {
-      key: "2",
-      isbn: "druha data",
-      author: "dalsi data",
-      book: "jeste dalsi data",
-      cover: "a posledni data",
-    },
-  ]);
+  const [row, setRow] = useState([  ]);
   return (
     <>
       <RowContext.Provider value={{ row, setRow }}>

@@ -12,9 +12,9 @@ import { useState, useContext } from "react";
 import { ColumnContext, RowContext } from "../Context";
 
 const BookList = () => {
-  const {row} = useContext(RowContext)
+  const { row } = useContext(RowContext);
 
-  const {column} = useContext(ColumnContext);
+  const { column } = useContext(ColumnContext);
 
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
@@ -24,11 +24,22 @@ const BookList = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={row}>
+        <TableBody items={row}
+        emptyContent="Ještě nebyly přidány žádné knihy">
           {(item) => (
             <TableRow key={item.key}>
               {(columnKey) => (
-                <TableCell>{getKeyValue(item, columnKey)}</TableCell>
+                <TableCell key={columnKey}>
+                  {columnKey === "cover" ? (
+                    <img
+                      src={item[columnKey]}
+                      alt="Book Cover"
+                      style={{ maxWidth: "100px", maxHeight: "100px" }}
+                    />
+                  ) : (
+                    item[columnKey]
+                  )}
+                </TableCell>
               )}
             </TableRow>
           )}

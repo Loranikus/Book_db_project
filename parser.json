@@ -1,0 +1,72 @@
+{
+  "kind": "books#volumes",
+  "totalItems": 1,
+  "items": [
+    {
+      "kind": "books#volume",
+      "id": "bjRaPQAACAAJ",
+      "etag": "uosN4lp4h0I",
+      "selfLink": "https://www.googleapis.com/books/v1/volumes/bjRaPQAACAAJ",
+      "volumeInfo": {
+        "title": "The Hitchhiker Trilogy",
+        "subtitle": "Guide to the Galaxy / The Restaurant at the End of the Universe / Life, the Universe and Everything / So Long, and Thanks for All the Fish / Mostly Harmless",
+        "authors": ["Douglas Adams", "Pan Macmillan Limited Staff"],
+        "publisher": "Picador",
+        "publishedDate": "2003-12",
+        "industryIdentifiers": [
+          {
+            "type": "ISBN_10",
+            "identifier": "0330437569"
+          },
+          {
+            "type": "ISBN_13",
+            "identifier": "9780330437561"
+          }
+        ],
+        "readingModes": {
+          "text": false,
+          "image": false
+        },
+        "pageCount": 976,
+        "printType": "BOOK",
+        "averageRating": 5,
+        "ratingsCount": 1,
+        "maturityRating": "NOT_MATURE",
+        "allowAnonLogging": false,
+        "contentVersion": "preview-1.0.0",
+        "imageLinks": {
+          "smallThumbnail": "http://books.google.com/books/content?id=bjRaPQAACAAJ&printsec=frontcover&img=1&zoom=5&source=gbs_api",
+          "thumbnail": "http://books.google.com/books/content?id=bjRaPQAACAAJ&printsec=frontcover&img=1&zoom=1&source=gbs_api"
+        },
+        "language": "en",
+        "previewLink": "http://books.google.cz/books?id=bjRaPQAACAAJ&dq=isbn:0330437569&hl=&cd=1&source=gbs_api",
+        "infoLink": "http://books.google.cz/books?id=bjRaPQAACAAJ&dq=isbn:0330437569&hl=&source=gbs_api",
+        "canonicalVolumeLink": "https://books.google.com/books/about/The_Hitchhiker_Trilogy.html?hl=&id=bjRaPQAACAAJ"
+      },
+      "saleInfo": {
+        "country": "CZ",
+        "saleability": "NOT_FOR_SALE",
+        "isEbook": false
+      },
+      "accessInfo": {
+        "country": "CZ",
+        "viewability": "NO_PAGES",
+        "embeddable": false,
+        "publicDomain": false,
+        "textToSpeechPermission": "ALLOWED",
+        "epub": {
+          "isAvailable": false
+        },
+        "pdf": {
+          "isAvailable": false
+        },
+        "webReaderLink": "http://play.google.com/books/reader?id=bjRaPQAACAAJ&hl=&source=gbs_api",
+        "accessViewStatus": "NONE",
+        "quoteSharingAllowed": false
+      },
+      "searchInfo": {
+        "textSnippet": "&quot; Wildly popular and wholly unique, this bestselling series needs no introduction and is indispensable for would-be galactic travellers and Douglas Adams fans, old and new.The Hitchhiker&#39;s Guide to the GalaxyOne Thursday lunchtime the Earth ..."
+      }
+    }
+  ]
+}

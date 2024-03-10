@@ -10,19 +10,18 @@ const SearchField = () => {
   const { column } = useContext(ColumnContext);
   const [searchValue, setSearchValue] = useState("");
 
-  const handleAddRow = () => {
+  const handleAddRow = (info) => {
     const newRow = {
       key: `${row.length} + 1`,
-      isbn: "vzor",
-      author: "vzor",
-      book: "vzor",
-      cover: "vzor",
+      isbn: `${info.industryIdentifiers[0].identifier}`,
+      author: `${info.authors}`,
+      book: `${info.title}`,
+      cover: `${info.imageLinks ? info.imageLinks.thumbnail : "Obrázek není k dispozici"}`,
     };
     setRow([...row, newRow]);
   };
 
   const handleSearch = async (e) => {
-   
     try {
       const response = await fetch(
         `https://www.googleapis.com/books/v1/volumes?q=isbn:${searchValue}&key=${API_Key}`
@@ -30,14 +29,13 @@ const SearchField = () => {
       if (response.ok) {
         const data = await response.json();
         console.log(data);
-        
+        const dataInfo = data.items[0].volumeInfo
+        handleAddRow(dataInfo)
       } else {
         console.error("Failed to fetch data", response.statusText);
-        
       }
     } catch (error) {
       console.error("Error fetching data", error.message);
-      
     }
     setSearchValue("");
   };
