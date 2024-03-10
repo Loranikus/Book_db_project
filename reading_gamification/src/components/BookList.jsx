@@ -15,7 +15,6 @@ import {RowContext} from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
 import { SupaContext } from "../Context/SupaContext";
 
-
 const BookList = () => {
   const { row, setRow } = useContext(RowContext);
   const { supabase } = useContext(SupaContext);
