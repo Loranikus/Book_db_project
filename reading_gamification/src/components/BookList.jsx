@@ -8,34 +8,37 @@ import {
 } from "@nextui-org/react";
 import React from "react";
 import { useState, useContext, useEffect } from "react";
-import {
-  ColumnContext,
-  RowContext,
-  SupaContext,
-  DbUpdateContext,
-} from "../Context";
+import {DbUpdateContext} from "../Context/DbUpdateContext";
+import {ColumnContext} from "../Context/ColumnContext";
+import {RowContext} from "../Context/Rowcontext";
+import { AuthContext } from "../Context/AuthContext";
+import { SupaContext } from "../Context/SupaContext";
+
 
 const BookList = () => {
   const { row, setRow } = useContext(RowContext);
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
   const { column } = useContext(ColumnContext);
+  const { auth, user } = useContext(AuthContext);
 
   useEffect(() => {
-    const loadData = async () => {
-      try {
-        const { data, error } = await supabase.from("bookList").select();
-        if (error) {
+    if (auth === true) {
+      const loadData = async () => {
+        try {
+          const { data, error } = await supabase.from("bookList").select();
+          if (error) {
+            console.error("Error fetching data from Supabase:", error.message);
+          } else {
+            setRow(data);
+          }
+        } catch (error) {
           console.error("Error fetching data from Supabase:", error.message);
-        } else {
-          setRow(data);
         }
-      } catch (error) {
-        console.error("Error fetching data from Supabase:", error.message);
-      }
-    };
-    loadData();
-  }, [supabase, updateDb]);
+      };
+      loadData();
+    }
+  }, [auth, supabase, updateDb]);
 
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
@@ -45,7 +48,10 @@ const BookList = () => {
             <TableColumn key={column.key}>{column.label}</TableColumn>
           )}
         </TableHeader>
-        <TableBody items={row} emptyContent="Ještě nebyly přidány žádné knihy">
+        <TableBody
+          items={row}
+          emptyContent={auth ? "Ještě nebyly přidány žádné knihy" : "Nejdřív se přihlaš"}
+        >
           {(item) => (
             <TableRow key={item.key}>
               {(columnKey) => (

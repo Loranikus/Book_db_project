@@ -1,6 +1,6 @@
 import { Input, Button } from "@nextui-org/react";
 import { useContext, useState } from "react";
-import { SupaContext } from "../Context";
+import { SupaContext } from "../Context/SupaContext";
 
 const Registration = () => {
   const { supabase } = useContext(SupaContext);

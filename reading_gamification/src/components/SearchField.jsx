@@ -1,18 +1,15 @@
 import { Input } from "@nextui-org/react";
 import { Button } from "@nextui-org/react";
 import { useState, useContext } from "react";
-import {
-  ColumnContext,
-  RowContext,
-  SupaContext,
-  DbUpdateContext,
-} from "../Context";
+import { SupaContext } from "../Context/SupaContext";
+import { RowContext } from "../Context/Rowcontext";
+import { AuthContext } from "../Context/AuthContext";
+import { DbUpdateContext } from "../Context/DbUpdateContext";
 
 const API_Key = "AIzaSyBa82XsjdW95ul9KvVnf5itbSTqmc4JGCg";
 
 const SearchField = () => {
   const { row, setRow } = useContext(RowContext);
-  const { column } = useContext(ColumnContext);
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
   const [searchValue, setSearchValue] = useState("");
