@@ -3,7 +3,7 @@ import { useState, useContext } from "react";
 import { SupaContext } from "../Context/SupaContext";
 import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
-import { v4 as uuidv4 } from "uuid";
+
 import { DbUpdateContext } from "../Context/DbUpdateContext";
 
 const API_Key = "AIzaSyBa82XsjdW95ul9KvVnf5itbSTqmc4JGCg";
@@ -16,9 +16,7 @@ const SearchField = () => {
   const [searchValue, setSearchValue] = useState("");
 
   const addDbRow = async (info) => {
-    const newKey = uuidv4();
     const { error } = await supabase.from("bookList").insert({
-      key: newKey,
       isbn: `${info.industryIdentifiers[0].identifier}`,
       author: `${info.authors}`,
       book: `${info.title}`,
@@ -54,7 +52,7 @@ const SearchField = () => {
         type="text"
         label="Vyplň ISBN"
         labelPlacement="inside"
-        placeholder={auth ?  "Vyplň hledané ISBN" : "Nejsi přihlášený"}
+        placeholder={auth ? "Vyplň hledané ISBN" : "Nejsi přihlášený"}
         isDisabled={!auth}
         isClearable
         color="primary"

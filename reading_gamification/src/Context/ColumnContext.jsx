@@ -19,8 +19,7 @@ export const ColumnContextProvider = ({ children }) => {
     {
       key: "cover",
       label: "Obálka",
-    },
-    { key: "options", label: "Možnosti" },
+    }
   ]);
   return (
     <ColumnContext.Provider value={{ column, setColumn }}>
