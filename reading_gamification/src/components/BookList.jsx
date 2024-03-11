@@ -7,6 +7,7 @@ import {
   TableBody,
   Image,
   Button,
+  Tooltip,
 } from "@nextui-org/react";
 import React from "react";
 import { useState, useContext, useEffect } from "react";
@@ -16,6 +17,9 @@ import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
 import { SupaContext } from "../Context/SupaContext";
 import { Delete } from "../assets/icons/Delete";
+import { Read } from "../assets/icons/Read";
+import { Cart } from "../assets/icons/Cart";
+import {Tick} from "../assets/icons/Tick"
 
 const BookList = () => {
   const { row, setRow } = useContext(RowContext);
@@ -23,7 +27,7 @@ const BookList = () => {
   const { updateDb } = useContext(DbUpdateContext);
   const { column } = useContext(ColumnContext);
   const { auth, user } = useContext(AuthContext);
-  const [del, setDel] = useState (false)
+  const [del, setDel] = useState(false);
 
   useEffect(() => {
     if (auth === true) {
@@ -34,7 +38,7 @@ const BookList = () => {
             console.error("Error fetching data from Supabase:", error.message);
           } else {
             setRow(data);
-            setDel(false)
+            setDel(false);
           }
         } catch (error) {
           console.error("Error fetching data from Supabase:", error.message);
@@ -50,7 +54,16 @@ const BookList = () => {
     } catch (error) {
       console.error("Nepodařilo se smazat řádek");
     }
-    setDel(true)
+    setDel(true);
+  };
+
+  const handleRead = async (key) => {
+    try {
+      const { error } = await supabase.from("bookList").delete().eq("key", key);
+    } catch (error) {
+      console.error("Nepodařilo se smazat řádek");
+    }
+    setDel(true);
   };
 
   return (
@@ -80,15 +93,63 @@ const BookList = () => {
                       style={{ maxWidth: "100px", maxHeight: "100px" }}
                     />
                   ) : columnKey === "options" ? (
-                    <Button
-                      isIconOnly
-                      color="none"
-                      aria-label="delete"
-                      disableRipple
-                      onClick={() => handleDelete(item.key)}
-                    >
-                      <Delete />
-                    </Button>
+                    <ul>
+                      <li className="inline-block"> 
+                        <Tooltip showArrow={true} content="Chci si koupit">
+                          <Button
+                            isIconOnly
+                            color="none"
+                            aria-label="wishlist"
+                            disableRipple
+                            onClick={() => handleWish(item.key)}
+                            >
+                            <Cart />
+                          </Button>
+                        </Tooltip>
+                      </li>
+                      <li className="inline-block"> 
+                        <Tooltip showArrow={true} content="Vlastním">
+                          <Button
+                            isIconOnly
+                            color="none"
+                            aria-label="owned"
+                            disableRipple
+                            onClick={() => handleOwn(item.key)}
+                          >
+                            <Tick />
+                          </Button>
+                        </Tooltip>
+                      </li>
+                      <li className="inline-block">
+                        <Tooltip
+                          showArrow={true}
+                          content="Označit jako přečtené"
+                        >
+                          <Button
+                            isIconOnly
+                            color="none"
+                            aria-label="mark as read"
+                            disableRipple
+                            onClick={() => handleRead(item.key)}
+                          >
+                            <Read />
+                          </Button>
+                        </Tooltip>
+                      </li>
+                      <li className="inline-block"> 
+                        <Tooltip showArrow={true} content="Smazat řádek">
+                          <Button
+                            isIconOnly
+                            color="none"
+                            aria-label="delete"
+                            disableRipple
+                            onClick={() => handleDelete(item.key)}
+                          >
+                            <Delete />
+                          </Button>
+                        </Tooltip>
+                      </li>
+                    </ul>
                   ) : (
                     item[columnKey]
                   )}
