@@ -7,12 +7,17 @@ import { Button, Tooltip, useDisclosure } from "@nextui-org/react";
 import { SupaContext } from "../Context/SupaContext";
 import { DbUpdateContext } from "../Context/DbUpdateContext";
 import WishNotif from "./WishNotif";
+import OwnNotif from "./OwnNotif";
+import ReadNotif from "./ReadNotif";
 
 const ButtonSet = ({ item, loadData }) => {
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
   const [del, setDel] = useState(false);
+  const [wishOpen, setWishOpen] = useState(false);
+  const [ownOpen, setOwnOpen] = useState(false);
+  const [readOpen, setReadOpen] = useState(false);
 
   const handleDelete = async (key) => {
     try {
@@ -80,13 +85,18 @@ const ButtonSet = ({ item, loadData }) => {
             disableRipple
             onClick={() => {
               handleWish(item.key, item.wishlist, item.bought);
-              onOpen();
+              setWishOpen(true);
             }}
           >
             <Cart />
           </Button>
         </Tooltip>
-        <WishNotif isOpen={isOpen} onClose={onClose} bought={item.bought} wish={item.wishlist}/>
+        <WishNotif
+          isOpen={wishOpen}
+          onClose={() => setWishOpen(false)}
+          bought={item.bought}
+          wish={item.wishlist}
+        />
       </li>
       <li className="inline-block">
         <Tooltip showArrow={true} content="Vlastním">
@@ -97,12 +107,17 @@ const ButtonSet = ({ item, loadData }) => {
             disableRipple
             onClick={() => {
               handleOwn(item.key, item.bought);
-              
+              setOwnOpen(true);
             }}
           >
             <Tick />
           </Button>
         </Tooltip>
+        <OwnNotif
+          isOpen={ownOpen}
+          onClose={() => setOwnOpen(false)}
+          bought={item.bought}
+        />
       </li>
       <li className="inline-block">
         <Tooltip showArrow={true} content="Označit jako přečtené">
@@ -113,12 +128,17 @@ const ButtonSet = ({ item, loadData }) => {
             disableRipple
             onClick={() => {
               handleRead(item.key, item.readlist);
-             
+              setReadOpen(true);
             }}
           >
             <Read />
           </Button>
         </Tooltip>
+        <ReadNotif
+          isOpen={readOpen}
+          onClose={() => setReadOpen(false)}
+          read={item.readlist}
+        />
       </li>
       <li className="inline-block">
         <Tooltip showArrow={true} content="Smazat řádek">
