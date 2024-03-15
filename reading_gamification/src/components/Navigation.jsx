@@ -13,11 +13,13 @@ import { useContext } from "react";
 import { SupaContext } from "../Context/SupaContext";
 import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Navigation = () => {
   const {auth} = useContext(AuthContext)
   const { supabase } = useContext(SupaContext);
-  const {row, setRow} = useContext(RowContext)
+  const {row, setRow} = useContext(RowContext);
+  const navigate = useNavigate()
   
   const handleLogout = async () => {
     try {
@@ -28,6 +30,7 @@ const Navigation = () => {
       } else {
         console.log("Uživatel byl odhlášen");
         setRow([]);
+        navigate("/")
       }
     } catch (error) {
       console.error("Odhlášení selhalo", error.message);
