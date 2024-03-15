@@ -9,32 +9,16 @@ const Home = () => {
         <SearchField />
         <Tabs aria-label="Lists">
           <Tab key="allList" title="Všechny knihy">
-            <Card>
-              <CardBody>
-                <BookList />
-              </CardBody>
-            </Card>
+            <BookList />
           </Tab>
           <Tab key="wishList" title="Seznam přání">
-            <Card>
-              <CardBody>
-                <BookList />
-              </CardBody>
-            </Card>
+            <BookList />
           </Tab>
           <Tab key="boughtList" title="Koupené knihy">
-            <Card>
-              <CardBody>
-                <BookList />
-              </CardBody>
-            </Card>
+            <BookList />
           </Tab>
           <Tab key="readList" title="Přečtené knihy">
-            <Card>
-              <CardBody>
-                <BookList />
-              </CardBody>
-            </Card>
+            <BookList />
           </Tab>
         </Tabs>
       </div>

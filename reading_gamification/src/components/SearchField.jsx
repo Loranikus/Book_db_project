@@ -47,7 +47,7 @@ const SearchField = () => {
   };
 
   return (
-    <div className="flex flex-col flex-wrap w-full items-center h-full">
+    <div className="flex flex-col flex-wrap w-full items-center h-full mb-2">
       <Input
         type="text"
         label="Vyplň ISBN"
