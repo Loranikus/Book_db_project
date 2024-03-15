@@ -22,9 +22,10 @@ const App = () => {
               <RowContextProvider>
                 <Navigation />
                 <Routes>
-                  <Route path="/" element={<Home />} />
+                  <Route path="/" element={<Login />} />
                   <Route path="/registration" element={<Registration />} />
                   <Route path="/login" element={<Login />} />
+                  <Route path="/home" element={<Home />} />
                 </Routes>
               </RowContextProvider>
             </ColumnContextProvider>

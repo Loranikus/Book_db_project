@@ -24,21 +24,22 @@ const BookList = () => {
   const { auth, user } = useContext(AuthContext);
   const [del, setDel] = useState(false);
 
+  const loadData = async () => {
+    try {
+      const { data, error } = await supabase.from("bookList").select();
+      if (error) {
+        console.error("Error fetching data from Supabase:", error.message);
+      } else {
+        setRow(data);
+        setDel(false);
+      }
+    } catch (error) {
+      console.error("Error fetching data from Supabase:", error.message);
+    }
+  };
+
   useEffect(() => {
     if (auth === true) {
-      const loadData = async () => {
-        try {
-          const { data, error } = await supabase.from("bookList").select();
-          if (error) {
-            console.error("Error fetching data from Supabase:", error.message);
-          } else {
-            setRow(data);
-            setDel(false);
-          }
-        } catch (error) {
-          console.error("Error fetching data from Supabase:", error.message);
-        }
-      };
       loadData();
     }
   }, [auth, supabase, updateDb, del]);
@@ -71,7 +72,7 @@ const BookList = () => {
                     />
                   ) : columnKey === "options" ? (
                     <ul>
-                      <ButtonSet item={item} />
+                      <ButtonSet item={item} loadData={loadData} />
                     </ul>
                   ) : (
                     item[columnKey]
