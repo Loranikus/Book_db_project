@@ -1,7 +1,7 @@
 import React from "react";
 import {Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, Button} from "@nextui-org/react";
 
- const Notif= ({isOpen, onClose, list}) =>  {
+ const WishNotif= ({isOpen, onClose, wish, bought}) =>  {
 
 
 
@@ -11,9 +11,9 @@ return (
         <ModalContent>
             {(onClose) => (
                 <>
-                 <ModalHeader className="flex flex-col gap-1">Přidáno</ModalHeader>
+                 <ModalHeader className="flex flex-col gap-1">Informace</ModalHeader>
                  <ModalBody>
-                    <p>Kniha byla {list ? "přidána do" : "odebrána ze"} seznamu</p>
+                    <p>Kniha byla {bought ? "již zakoupena!" : wish ? "přidána do seznamu přání" : "odebrána ze seznamu přání"}</p>
                  </ModalBody>
                  <ModalFooter>
                     <Button color="success" onPress={onClose}>OK</Button>
@@ -28,4 +28,4 @@ return (
 
 
 
-  export default Notif 
+  export default WishNotif 

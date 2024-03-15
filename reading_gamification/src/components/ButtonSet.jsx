@@ -6,26 +6,26 @@ import { Tick } from "../assets/icons/Tick";
 import { Button, Tooltip, useDisclosure } from "@nextui-org/react";
 import { SupaContext } from "../Context/SupaContext";
 import { DbUpdateContext } from "../Context/DbUpdateContext";
-import Notif from "./Notif";
+import WishNotif from "./WishNotif";
 
 const ButtonSet = ({ item, loadData }) => {
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
   const { onOpen, isOpen, onClose } = useDisclosure();
-  const [del, setDel] = useState(false)
+  const [del, setDel] = useState(false);
 
   const handleDelete = async (key) => {
     try {
       const { error } = await supabase.from("bookList").delete().eq("key", key);
-    if(!error) {
-      setDel(true)
-      loadData()
-    } else {
-      console.error("Chyba při mazání", error.message)
+      if (!error) {
+        setDel(true);
+        loadData();
+      } else {
+        console.error("Chyba při mazání", error.message);
+      }
+    } catch (error) {
+      console.error("Chyba při mazání", error.message);
     }
-  } catch (error){
-    console.error("Chyba při mazání", error.message)
-  }
   };
 
   const handleRead = async (key, read) => {
@@ -55,7 +55,7 @@ const ButtonSet = ({ item, loadData }) => {
   const handleWish = async (key, wish, bought) => {
     try {
       if (bought) {
-        console.warn("Tuto kniho již vlastníš!");
+        console.warn("Tuto knihu již vlastníš!");
         return;
       }
       const { error } = await supabase
@@ -86,7 +86,7 @@ const ButtonSet = ({ item, loadData }) => {
             <Cart />
           </Button>
         </Tooltip>
-        <Notif isOpen={isOpen} onClose={onClose} list={item.wishlist} />
+        <WishNotif isOpen={isOpen} onClose={onClose} bought={item.bought} wish={item.wishlist}/>
       </li>
       <li className="inline-block">
         <Tooltip showArrow={true} content="Vlastním">
@@ -97,13 +97,12 @@ const ButtonSet = ({ item, loadData }) => {
             disableRipple
             onClick={() => {
               handleOwn(item.key, item.bought);
-              onOpen();
+              
             }}
           >
             <Tick />
           </Button>
         </Tooltip>
-        <Notif isOpen={isOpen} onClose={onClose} list={item.bought} />
       </li>
       <li className="inline-block">
         <Tooltip showArrow={true} content="Označit jako přečtené">
@@ -114,13 +113,12 @@ const ButtonSet = ({ item, loadData }) => {
             disableRipple
             onClick={() => {
               handleRead(item.key, item.readlist);
-              onOpen();
+             
             }}
           >
             <Read />
           </Button>
         </Tooltip>
-        <Notif isOpen={isOpen} onClose={onClose} list={item.read} />
       </li>
       <li className="inline-block">
         <Tooltip showArrow={true} content="Smazat řádek">
