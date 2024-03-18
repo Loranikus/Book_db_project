@@ -25,6 +25,7 @@ const SearchField = () => {
       }`,
       published: `${info.publishedDate}`,
       link: `${info.infoLink}`,
+      desc: `${info.description}`
     });
     updateDb();
   };
