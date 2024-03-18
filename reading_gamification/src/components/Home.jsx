@@ -6,9 +6,9 @@ import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 const Home = () => {
   return (
     <>
-      <div>
+      <div className="flex flex-col items-center">
         <SearchField />
-        <Tabs aria-label="Lists">
+        <Tabs aria-label="Lists" >
           <Tab key="allList" title="Všechny knihy">
             <BookList />
           </Tab>
