@@ -1,6 +1,8 @@
 import BookList from "./BookList";
 import WishList from "./WishList";
+import BoughtList from "./BoughtList";
 import SearchField from "./SearchField";
+import ReadList from "./ReadList";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 const Home = () => {
@@ -16,10 +18,10 @@ const Home = () => {
             <WishList />
           </Tab>
           <Tab key="boughtList" title="Koupené knihy">
-           
+           <BoughtList />
           </Tab>
           <Tab key="readList" title="Přečtené knihy">
-           
+           <ReadList />
           </Tab>
         </Tabs>
       </div>

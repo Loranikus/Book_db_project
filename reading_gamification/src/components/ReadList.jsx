@@ -6,7 +6,6 @@ import {
   TableCell,
   TableBody,
   Image,
- 
 } from "@nextui-org/react";
 
 import React from "react";
@@ -17,7 +16,7 @@ import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
 import { SupaContext } from "../Context/SupaContext";
 import ButtonSet from "./ButtonSet";
-const WishList = () => {
+const ReadList = () => {
   const { row, setRow } = useContext(RowContext);
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
@@ -56,7 +55,7 @@ const WishList = () => {
           )}
         </TableHeader>
         <TableBody
-          items={row.filter(item => item.wishlist)}
+          items={row.filter(item => item.readlist)}
           emptyContent={
             auth ? "Ještě nebyly přidány žádné knihy" : "Nejdřív se přihlaš"
           }
@@ -89,4 +88,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default ReadList;
