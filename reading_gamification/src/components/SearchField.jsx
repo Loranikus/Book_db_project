@@ -23,6 +23,8 @@ const SearchField = () => {
       cover: `${
         info.imageLinks ? info.imageLinks.thumbnail : "Obrázek není k dispozici"
       }`,
+      published: `${info.publishedDate}`,
+      link: `${info.infoLink}`,
     });
     updateDb();
   };
