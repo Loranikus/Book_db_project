@@ -56,7 +56,7 @@ const Navigation = () => {
             </Link>
           </NavbarItem>
         </NavbarContent>
-        <Button onClick={handleLogout} className="max-w-xs mb-2">
+        <Button isDisabled={!auth} onClick={handleLogout} className="max-w-xs mb-2">
           Odhlásit
         </Button>
       </Navbar>
