@@ -3,6 +3,7 @@ import WishList from "./WishList";
 import BoughtList from "./BoughtList";
 import SearchField from "./SearchField";
 import ReadList from "./ReadList";
+import HorizontalTimeline from "./HorizontalTimeline";
 import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
     <>
       <div className="flex flex-col items-center">
         <SearchField />
+        
         <Tabs aria-label="Lists" >
           <Tab key="allList" title="Všechny knihy">
             <BookList />

@@ -6,7 +6,6 @@ import {
   TableCell,
   TableBody,
   Image,
- 
 } from "@nextui-org/react";
 
 import React from "react";
@@ -17,6 +16,7 @@ import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
 import { SupaContext } from "../Context/SupaContext";
 import ButtonSet from "./ButtonSet";
+import HorizontalTimeline from "./HorizontalTimeline";
 const BookList = () => {
   const { row, setRow } = useContext(RowContext);
   const { supabase } = useContext(SupaContext);
@@ -24,6 +24,7 @@ const BookList = () => {
   const { column } = useContext(ColumnContext);
   const { auth, user } = useContext(AuthContext);
   const [del, setDel] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
     try {
@@ -33,6 +34,7 @@ const BookList = () => {
       } else {
         setRow(data);
         setDel(false);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Error fetching data from Supabase:", error.message);
@@ -45,45 +47,54 @@ const BookList = () => {
     }
   }, [auth, supabase, updateDb, del]);
 
+  console.log("Updated row data:", row)
+
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
-      <Table aria-label="List of inserted books" className="max-w-4xl">
-        <TableHeader
-          columns={[...column, { key: "options", label: "Možnosti" }]}
-        >
-          {(column) => (
-            <TableColumn key={column.key}>{column.label}</TableColumn>
-          )}
-        </TableHeader>
-        <TableBody
-          items={row}
-          emptyContent={
-            auth ? "Ještě nebyly přidány žádné knihy" : "Nejdřív se přihlaš"
-          }
-        >
-          {(item) => (
-            <TableRow key={item.key}>
-              {(columnKey) => (
-                <TableCell key={columnKey}>
-                  {columnKey === "cover" ? (
-                    <Image
-                      src={item[columnKey]}
-                      alt="Book Cover"
-                      style={{ maxWidth: "100px", maxHeight: "100px" }}
-                    />
-                  ) : columnKey === "options" ? (
-                    <ul>
-                      <ButtonSet item={item} loadData={loadData} />
-                    </ul>
-                  ) : (
-                    item[columnKey]
-                  )}
-                </TableCell>
+      {loading ? (
+        <p>Loading... </p>
+      ) : (
+        <>
+          <HorizontalTimeline row={row}/>
+          <Table aria-label="List of inserted books" className="max-w-4xl">
+            <TableHeader
+              columns={[...column, { key: "options", label: "Možnosti" }]}
+            >
+              {(column) => (
+                <TableColumn key={column.key}>{column.label}</TableColumn>
               )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+            </TableHeader>
+            <TableBody
+              items={row}
+              emptyContent={
+                auth ? "Ještě nebyly přidány žádné knihy" : "Nejdřív se přihlaš"
+              }
+            >
+              {(item) => (
+                <TableRow key={item.key}>
+                  {(columnKey) => (
+                    <TableCell key={columnKey}>
+                      {columnKey === "cover" ? (
+                        <Image
+                          src={item[columnKey]}
+                          alt="Book Cover"
+                          style={{ maxWidth: "100px", maxHeight: "100px" }}
+                        />
+                      ) : columnKey === "options" ? (
+                        <ul>
+                          <ButtonSet item={item} loadData={loadData} />
+                        </ul>
+                      ) : (
+                        item[columnKey]
+                      )}
+                    </TableCell>
+                  )}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </>
+      )}
     </div>
   );
 };
