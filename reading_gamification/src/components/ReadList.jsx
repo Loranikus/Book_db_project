@@ -46,7 +46,7 @@ const ReadList = () => {
 
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
-      <Table aria-label="List of inserted books" className="max-w-4xl">
+      <Table aria-label="List of inserted books" className="max-w-4xl" isStriped>
         <TableHeader
           columns={[...column, { key: "options", label: "Možnosti" }]}
         >

@@ -21,7 +21,7 @@ import HorizontalTimeline from "./Timeline";
 
 const BookList = () => {
   const { row, setRow } = useContext(RowContext);
-  
+
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
   const { column } = useContext(ColumnContext);
@@ -59,7 +59,7 @@ const BookList = () => {
       ) : (
         <>
           
-          <Table aria-label="List of inserted books" className="max-w-4xl">
+          <Table aria-label="List of inserted books" className="max-w-4xl" isStriped>
             <TableHeader
               columns={[...column, { key: "options", label: "Možnosti" }]}
             >
