@@ -56,7 +56,7 @@ const Navigation = () => {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/timeline" color="foreground" isBlock>
+            <Link href={auth ? "/timeline" : "/"} color="foreground" isBlock>
               Časová osa
             </Link>
           </NavbarItem>
