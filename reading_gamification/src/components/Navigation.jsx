@@ -38,20 +38,20 @@ const Navigation = () => {
   };
   return (
     <>
-      <Navbar className="flex">
+      <Navbar className="flex" shouldHideOnScroll>
         <NavbarContent className="flex justify-end">
           <NavbarItem>
             <Link href={auth ? "/home" : "/"} color="foreground" isBlock>
               Domů
             </Link>
           </NavbarItem>
-          <NavbarItem>
-            <Link href="/login" color="foreground" isBlock>
+          <NavbarItem >
+            <Link href={auth ? "/home" : "/login"} color="foreground" isBlock>
               Přihlášení
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link href="/registration" color="foreground" isBlock>
+            <Link href={auth ? "/home" : "/registration"} color="foreground" isBlock>
               Registrace
             </Link>
           </NavbarItem>
