@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import SearchField from "./components/SearchField";
+import Timeline from "./components/Timeline";
 import Home from "./components/Home";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
@@ -26,6 +26,7 @@ const App = () => {
                   <Route path="/registration" element={<Registration />} />
                   <Route path="/login" element={<Login />} />
                   <Route path="/home" element={<Home />} />
+                  <Route path="/timeline" element={<Timeline />} />
                 </Routes>
               </RowContextProvider>
             </ColumnContextProvider>

@@ -6,6 +6,7 @@ import {
   TableCell,
   TableBody,
   Image,
+  Pagination,
 } from "@nextui-org/react";
 
 import React from "react";
@@ -16,9 +17,11 @@ import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
 import { SupaContext } from "../Context/SupaContext";
 import ButtonSet from "./ButtonSet";
-import HorizontalTimeline from "./HorizontalTimeline";
+import HorizontalTimeline from "./Timeline";
+
 const BookList = () => {
   const { row, setRow } = useContext(RowContext);
+  
   const { supabase } = useContext(SupaContext);
   const { updateDb } = useContext(DbUpdateContext);
   const { column } = useContext(ColumnContext);
@@ -47,7 +50,7 @@ const BookList = () => {
     }
   }, [auth, supabase, updateDb, del]);
 
-  console.log("Updated row data:", row)
+  console.log("Updated row data:", row);
 
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
@@ -55,7 +58,7 @@ const BookList = () => {
         <p>Loading... </p>
       ) : (
         <>
-          <HorizontalTimeline row={row}/>
+          
           <Table aria-label="List of inserted books" className="max-w-4xl">
             <TableHeader
               columns={[...column, { key: "options", label: "Možnosti" }]}

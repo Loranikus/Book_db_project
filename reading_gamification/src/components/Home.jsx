@@ -3,8 +3,7 @@ import WishList from "./WishList";
 import BoughtList from "./BoughtList";
 import SearchField from "./SearchField";
 import ReadList from "./ReadList";
-import HorizontalTimeline from "./HorizontalTimeline";
-import { Tabs, Tab, Card, CardBody } from "@nextui-org/react";
+import { Tabs, Tab  } from "@nextui-org/react";
 
 const Home = () => {
   return (

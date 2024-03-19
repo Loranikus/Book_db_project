@@ -13,7 +13,7 @@ import { useContext } from "react";
 import { SupaContext } from "../Context/SupaContext";
 import { RowContext } from "../Context/Rowcontext";
 import { AuthContext } from "../Context/AuthContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 const Navigation = () => {
   const {auth} = useContext(AuthContext)
@@ -53,6 +53,11 @@ const Navigation = () => {
           <NavbarItem>
             <Link href="/registration" color="foreground" isBlock>
               Registrace
+            </Link>
+          </NavbarItem>
+          <NavbarItem>
+            <Link href="/timeline" color="foreground" isBlock>
+              Časová osa
             </Link>
           </NavbarItem>
         </NavbarContent>
