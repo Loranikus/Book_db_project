@@ -57,7 +57,7 @@ const Timeline = () => {
   }));
 
   return (
-    <div className="mt-2 flex flex-wrap w-full justify-center">
+    <div className="mt-2 flex flex-wrap w-full justify-center" >
       <Card>
         {isLoading ? (
           <p>Loading...</p>
@@ -66,6 +66,7 @@ const Timeline = () => {
             items={items}
             mode="VERTICAL_ALTERNATING"
             itemWidth={150}
+            disableToolbar={true}
           />
         )}
       </Card>
