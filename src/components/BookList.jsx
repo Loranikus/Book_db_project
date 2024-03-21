@@ -50,8 +50,6 @@ const BookList = () => {
     }
   }, [auth, supabase, updateDb, del]);
 
-  console.log("Updated row data:", row);
-
   return (
     <div className="mt-2 flex flex-wrap w-full justify-center">
       {loading ? (

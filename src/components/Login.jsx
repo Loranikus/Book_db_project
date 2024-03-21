@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { SupaContext } from "../Context/SupaContext";
 import { RowContext } from "../Context/Rowcontext";
 import { useNavigate } from "react-router-dom";
-import  Dialog from "./Dialog";
+import Dialog from "./Dialog";
 
 const Login = () => {
   const { supabase } = useContext(SupaContext);
@@ -12,6 +12,13 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const [mess, setMess] = useState(null);
+  const [redir, setRedir] = useState(null)
+
+  const handleRedirect = () => {
+    onClose();
+    navigate(redir);
+  };
 
   const handleLogin = async (e) => {
     try {
@@ -22,21 +29,22 @@ const Login = () => {
 
       if (error) {
         console.warn("Přihlášení selhalo");
-        return (
-          <Dialog
-            text="Neplatné přihlašovací údaje"
-            isOpen={isOpen}
-            onClose={onClose}
-          />
-        );
+        setMess("Neplatné přihlašovací údaje");
+        setRedir("/")
+        onOpen();
+        return;
       }
 
       if (data.user && data.session) {
         console.log("Uživatel přihlášen", data.user);
-        navigate("/home");
+        setMess("Příhlášení úspěšné")
+        setRedir("/home")
+        onOpen()
       }
     } catch (error) {
       console.warn("Přihlášení selhalo");
+      setMess("Přihlášení selhalo");
+      onOpen();
     }
     setEmail("");
     setPassword("");
@@ -50,7 +58,6 @@ const Login = () => {
           label="Vyplň email"
           labelPlacement="inside"
           placeholder="123@priklad.cz"
-          isClearable
           className="max-w-sm mb-2"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
@@ -59,7 +66,6 @@ const Login = () => {
           type="password"
           label="Zadej heslo"
           labelPlacement="inside"
-          isClearable
           className="max-w-sm mb-2"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
@@ -69,6 +75,7 @@ const Login = () => {
           Přihlásit
         </Button>
       </form>
+      <Dialog text={mess} isOpen={isOpen} onClose={handleRedirect} />
     </div>
   );
 };
