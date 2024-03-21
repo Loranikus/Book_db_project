@@ -16,16 +16,20 @@ const Registration = () => {
 
       if (error) {
         setMess("Při vytváření uživatele došlo k chybě");
+        console.log("chyba")
+        onOpen()
       } else {
         setEmail("");
         setPassword("");
         setMess(
           "Uživatel vytvořen, počkej na potvrzovací e-mail, který dorazí za chvíli"
         );
-        console.log("Uživatel vytvořen");
+        onOpen()
       }
     } catch (error) {
       setMess("Registrace neúspěšná");
+      
+      onOpen()
     }
   };
 
@@ -37,7 +41,7 @@ const Registration = () => {
           label="Vyplň email"
           labelPlacement="inside"
           placeholder="123@priklad.cz"
-          isClearable
+          
           className="max-w-xs mb-2"
           onChange={(e) => setEmail(e.target.value)}
           value={email}
@@ -46,7 +50,7 @@ const Registration = () => {
           type="password"
           label="Zadej heslo"
           labelPlacement="inside"
-          isClearable
+          
           className="max-w-xs mb-2"
           onChange={(e) => setPassword(e.target.value)}
           value={password}
