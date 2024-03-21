@@ -3,7 +3,7 @@ import { useContext, useState } from "react";
 import { SupaContext } from "../Context/SupaContext";
 import { RowContext } from "../Context/Rowcontext";
 import { useNavigate } from "react-router-dom";
-import { Dialog } from "./Dialog";
+import  Dialog from "./Dialog";
 
 const Login = () => {
   const { supabase } = useContext(SupaContext);
